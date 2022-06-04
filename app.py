@@ -26,11 +26,6 @@ books = [
 
 
 
-# def getproduct(search):
-    
-
-
-# getproduct("Generator")
 
 @app.route('/', methods=['GET'])
 def home():
@@ -87,36 +82,36 @@ def api_search():
 
     return jsonify(products)
     
-@app.route('/api/awari/konga', methods=['GET'])
-def api_search_konga():
-    if 'search' in request.args:
-        search = request.args['search']
-    else:
-        return "Error: No id field provided. Please specify an id."
-    results = []
+# @app.route('/api/awari/konga', methods=['GET'])
+# def api_search_konga():
+#     if 'search' in request.args:
+#         search = request.args['search']
+#     else:
+#         return "Error: No id field provided. Please specify an id."
+#     results = []
 
-    products = []
+#     products = []
 
-    baseurl = f"https://jiji.ng/search?query={search}"
+#     baseurl = f"https://jiji.ng/search?query={search}"
 
-    r = requests.get(baseurl)
+#     r = requests.get(baseurl)
 
-    soup = BeautifulSoup(r.content, 'lxml')
+#     soup = BeautifulSoup(r.content, 'lxml')
 
-    myList = soup.find_all('div', class_='b-list-advert__item-wrapper')
-    print("list",myList)
+#     myList = soup.find_all('div', class_='b-list-advert__item-wrapper')
+#     print("list",myList)
 
-    for item in myList:
-        name = item.find('div', class_='b-advert-title-inner qa-advert-title b-advert-title-inner--h3').text.strip()
-        price = item.find('div', class_='prc').text.strip()
-        imgUrl = item.find('picture', class_='h-flex-center h-width-100p h-height-100p h-overflow-hidden').get('srcset')
-        link = item.find('a', href=True)['href']
+#     for item in myList:
+#         name = item.find('div', class_='b-advert-title-inner qa-advert-title b-advert-title-inner--h3').text.strip()
+#         price = item.find('div', class_='prc').text.strip()
+#         imgUrl = item.find('picture', class_='h-flex-center h-width-100p h-height-100p h-overflow-hidden').get('srcset')
+#         link = item.find('a', href=True)['href']
 
-        my_dict = {'Product Name': name, 'Product Price': price, "link": link, "image": imgUrl}
-        products.append(my_dict)
+#         my_dict = {'Product Name': name, 'Product Price': price, "link": link, "image": imgUrl}
+#         products.append(my_dict)
 
 
-    return jsonify(products)
+#     return jsonify(products)
     
 
 
