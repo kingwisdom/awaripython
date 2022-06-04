@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 
 app = flask.Flask(__name__)
-app.config["DEBUG"] = True
+app.config["DEBUG"] = False
 
 books = [
     {'id': 0,
