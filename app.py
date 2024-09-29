@@ -31,25 +31,6 @@ books = [
 def home():
     return "<h1>Distant Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
-@app.route('/api/v1/resources/books/all', methods=['GET'])
-def api_all():
-    return jsonify(books)
-
-@app.route('/api/v1/resources/books', methods=['GET'])
-def api_id():
-    # Check if an ID was provided as part of the URL.
-    # If ID is provided, assign it to a variable.
-    # If no ID is provided, display an error in the browser.
-    if 'id' in request.args:
-        id = int(request.args['id'])
-    else:
-        return "Error: No id field provided. Please specify an id."
-    results = []
-
-    for book in books:
-        if book['id'] == id:
-            results.append(book)
-    return jsonify(results)
 
 
 @app.route('/api/awari/items', methods=['GET'])
@@ -67,7 +48,7 @@ def api_search():
         r = requests.get(baseurl)
 
         soup = BeautifulSoup(r.content, 'lxml')
-
+        print(baseurl)
         myList = soup.find_all('article', class_='prd _fb col c-prd')
 
         for item in myList:
